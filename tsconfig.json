@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "react": ["alias/react"],
+        "react/jsx-runtime": ["alias/react-jsx-runtime"]
+      }
+    }
+  }
+  

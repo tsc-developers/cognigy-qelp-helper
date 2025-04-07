@@ -1,16 +1,13 @@
-var $yx6n1$reactjsxruntime = require("react/jsx-runtime");
-require("react");
-
+var $yx6n1$react = require("react");
 
 
 const $91fc7c7f5ab63f5b$var$RedText = (props)=>{
     const text = props.message.text;
-    return /*#__PURE__*/ (0, $yx6n1$reactjsxruntime.jsx)("span", {
+    return /*#__PURE__*/ $yx6n1$react.createElement("span", {
         style: {
             color: 'red'
-        },
-        children: text
-    });
+        }
+    }, text);
 };
 const $91fc7c7f5ab63f5b$var$redTextPlugin = {
     match: 'red-text',

@@ -4,11 +4,11 @@
   "description": "Qelp Helper Plugin",
   "main": "dist/index.js",
   "scripts": {
-    "build": "parcel build src/index.jsx --dist-dir dist"
+    "build": "parcel build src/index.jsx"
   },
   "alias": {
     "react": "./alias/react",
-    "react/jsx-runtime": "./node_modules/react/jsx-runtime.js"
+    "react/jsx-runtime": "./alias/react-jsx-runtime"
   },
   "author": "sergio.marreiro@foundever.com",
   "license": "ISC",
@@ -16,5 +16,10 @@
     "parcel": "^2.14.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-react": "^7.26.3",
+    "babel-plugin-module-resolver": "^5.0.2"
   }
 }
