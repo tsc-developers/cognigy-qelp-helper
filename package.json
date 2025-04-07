@@ -2,14 +2,22 @@
   "name": "cognigy-qelp-helper",
   "version": "0.0.1",
   "description": "Qelp Helper Plugin",
-  "main": "dist/index.js",
   "scripts": {
-    "build": "parcel build src/index.jsx"
+     "build": "parcel build src/index.jsx --dist-dir dist"
   },
   "alias": {
     "react": "./alias/react",
     "react/jsx-runtime": "./alias/react-jsx-runtime"
   },
+  "targets": {
+    "default": {
+      "context": "browser",
+      "outputFormat": "global",
+      "isLibrary": true,
+      "distDir": "dist",
+      "sourceMap": false
+    }
+  },  
   "author": "sergio.marreiro@foundever.com",
   "license": "ISC",
   "dependencies": {
