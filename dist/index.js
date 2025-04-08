@@ -69,23 +69,8 @@ const $a3890b0e758ab3ef$export$cfa223d39f988ec3 = {
 };
 
 
-// Only run this if we're in a browser (Cognigy Webchat)
-if (typeof window !== 'undefined') {
-    if (!window.cognigyWebchatMessagePlugins) window.cognigyWebchatMessagePlugins = [];
-    window.cognigyWebchatMessagePlugins.push((0, $aaac81b1609d807f$export$65e42e5ffa7c7b85));
-    window.cognigyWebchatMessagePlugins.push((0, $a3890b0e758ab3ef$export$cfa223d39f988ec3));
-} // Cognigy Webchat Plugin Export
- // if (typeof window !== "undefined" && window.Webchat) {
- //     window.Webchat.registerPlugin({
- //       name: "TutorialViewer",
- //       component: TutorialViewer,
- //       props: {
- //         tutorial: {
- //           type: "object",
- //           description: "Tutorial JSON data conforming to schema"
- //         }
- //       }
- //     });
- //   }
+window.cognigyWebchatMessagePlugins = window.cognigyWebchatMessagePlugins || [];
+window.cognigyWebchatMessagePlugins.push((0, $a3890b0e758ab3ef$export$cfa223d39f988ec3));
+window.cognigyWebchatMessagePlugins.push((0, $aaac81b1609d807f$export$65e42e5ffa7c7b85));
 
 })();
