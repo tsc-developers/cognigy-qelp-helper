@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Qelp Helper Plugin",
   "scripts": {
-     "build": "parcel build src/index.jsx --dist-dir dist"
+    "build": "parcel build src/index.jsx --dist-dir dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "alias": {
     "react": "./alias/react",
@@ -17,7 +19,7 @@
       "distDir": "dist",
       "sourceMap": false
     }
-  },  
+  },
   "author": "sergio.marreiro@foundever.com",
   "license": "ISC",
   "dependencies": {
@@ -28,6 +30,15 @@
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
-    "babel-plugin-module-resolver": "^5.0.2"
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-webpack5": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "babel-plugin-module-resolver": "^5.0.2",
+    "storybook": "^8.6.12"
   }
 }

@@ -1,23 +1,27 @@
-import * as React from 'react'
+import { redTextPlugin } from './RedText';
+import { tutorialViewerPlugin } from './TutorialViewer';
 
-const RedText = (props) => {
-    const text = props.message.text
+// Only run this if we're in a browser (Cognigy Webchat)
+if (typeof window !== 'undefined') {
+    if (!window.cognigyWebchatMessagePlugins) {
+        window.cognigyWebchatMessagePlugins = [];
+    }
 
-    return (
-        <span style={{ color: 'red' }}>
-            {text}
-        </span>
-    )
+    window.cognigyWebchatMessagePlugins.push(redTextPlugin);
 }
 
-const redTextPlugin = {
-    match: 'red-text',
-    component: RedText
-}
 
-// create if it does not exist yet
-if (!window.cognigyWebchatMessagePlugins) {
-    window.cognigyWebchatMessagePlugins = []
-}
-
-window.cognigyWebchatMessagePlugins.push(redTextPlugin);
+// Cognigy Webchat Plugin Export
+if (typeof window !== "undefined" && window.Webchat) {
+    window.Webchat.registerPlugin({
+      name: "TutorialViewer",
+      component: TutorialViewer,
+      props: {
+        tutorial: {
+          type: "object",
+          description: "Tutorial JSON data conforming to schema"
+        }
+      }
+    });
+  }
+  
