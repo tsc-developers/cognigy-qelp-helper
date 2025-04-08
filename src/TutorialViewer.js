@@ -1,6 +1,10 @@
 import React from "react";
 
-export const TutorialViewer = ({ tutorial }) => {
+export const TutorialViewer = ({ message }) => {
+  const tutorial = message?.data?._plugin?.tutorial;
+
+  console.log(message);
+  
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="p-4">

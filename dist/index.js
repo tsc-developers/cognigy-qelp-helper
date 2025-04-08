@@ -25,7 +25,9 @@ const $aaac81b1609d807f$export$65e42e5ffa7c7b85 = {
 
 
 
-const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ tutorial: tutorial })=>{
+const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
+    const tutorial = message?.data?._plugin?.tutorial;
+    console.log(message);
     return /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "w-full h-full flex flex-col overflow-hidden"
     }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
