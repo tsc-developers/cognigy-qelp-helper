@@ -18,10 +18,35 @@
   font-size: 1.1rem;
 }
 
-.tutorial-steps-scroll-wrapper {
-  flex: 1;
+.tutorial-navigation {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  flex-direction: row;
+  height: fit-content;
+  display: flex;
   position: relative;
-  overflow: hidden;
+}
+
+.tutorial-steps-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  display: flex;
+  overflow-x: auto;
+}
+
+.tutorial-step-wrapper {
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 4px 4px #5553;
+}
+
+.tutorial-step {
+  scroll-snap-align: start;
+  scroll-snap-align: start;
+  flex-direction: column;
+  min-width: calc(100% - 90px);
+  padding: 45px;
+  display: block;
 }
 
 .nav-button {
@@ -37,31 +62,8 @@
   right: 0;
 }
 
-.tutorial-navigation {
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  flex-direction: row;
-  height: fit-content;
-  display: flex;
-  position: relative;
-}
-
-.tutorial-navigation::-webkit-scrollbar {
+.tutorial-steps-scroll::-webkit-scrollbar {
   display: none;
-}
-
-.tutorial-step {
-  scroll-snap-align: start;
-  text-align: center;
-  border-radius: 8px;
-  flex-direction: column;
-  width: calc(100% - 90px);
-  height: fit-content;
-  margin: auto;
-  padding: 1rem;
-  display: flex;
-  position: relative;
-  box-shadow: 0 0 4px 4px #5553;
 }
 
 .tutorial-step-img-wrapper {

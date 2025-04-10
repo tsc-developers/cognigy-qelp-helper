@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "node scripts/inject-css.js",    
     "build": "npm run prebuild && parcel build src/index.jsx --dist-dir dist",
+    "postbuild": "node scripts/restore-placeholder.js",    
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

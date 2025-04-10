@@ -10,6 +10,7 @@ if (!window.__COGNIGY_WEBCHAT) throw new Error('Cognigy Webchat v2.7 or higher h
 $d170ef2c6ed47533$exports = window.__COGNIGY_WEBCHAT.React;
 
 
+
 // MarkdownRenderer.jsx
 
 var $1222a5f08162cc3a$exports = {};
@@ -3733,7 +3734,7 @@ function $878802ac9d103e69$export$2e2bcd8739ae039({ markdown: markdown }) {
 }
 
 
-
+// CSS INJECTION PLACEHOLDER
 const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
 
 .tutorial-viewer {
@@ -3755,11 +3756,32 @@ const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
   padding: 0.5rem;
   color: #555;
 }
-
-.tutorial-steps-scroll-wrapper {
+.tutorial-navigation {
   position: relative;
-  flex: 1;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: fit-content;
+}
+.tutorial-steps-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+.tutorial-step-wrapper {
+  box-shadow: 0 0 4px 4px #55555533;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.tutorial-step {
+  display: block;
+  padding: 45px;
+  scroll-snap-align: start;
+  flex-direction: column;
+  scroll-snap-align: start;
+  min-width: calc(100% - 90px);
 }
 
 .nav-button {
@@ -3774,32 +3796,11 @@ const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
   right: 0;
 }
 
-.tutorial-navigation {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  height: fit-content;
-}
-
-.tutorial-navigation::-webkit-scrollbar {
+.tutorial-steps-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.tutorial-step {
-  display: flex;
-  flex-direction: column;
-  scroll-snap-align: start;
-  position: relative;
-  text-align: center;
-  padding: 1rem;
-  width: calc(100% - 90px);
-  height: fit-content;
-  box-shadow: 0 0 4px 4px #55555533;
-  border-radius: 8px;
-  margin: auto;
-}
+
 .tutorial-step-img-wrapper {
   position: relative;
   display: block;
@@ -3831,22 +3832,61 @@ const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
   transform: translate(-50%, -50%);
   pointer-events: none;
 }`;
-if (typeof document !== 'undefined') {
-    const styleEl = document.createElement('style');
-    styleEl.type = 'text/css';
-    styleEl.innerText = $a3890b0e758ab3ef$var$injectedStyles;
-    document.head.appendChild(styleEl);
-}
+const $a3890b0e758ab3ef$var$style = document.createElement("style");
+$a3890b0e758ab3ef$var$style.textContent = $a3890b0e758ab3ef$var$injectedStyles;
+document.head.appendChild($a3890b0e758ab3ef$var$style);
 const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
-    const tutorial = message?.data?._plugin?.tutorial;
-    const [currentStep, setCurrentStep] = (0, $d170ef2c6ed47533$exports.useState)(0);
-    const nextStep = ()=>{
-        if (currentStep < tutorial.steps.length - 1) setCurrentStep(currentStep + 1);
+    const containerRef = (0, $d170ef2c6ed47533$exports.useRef)(null);
+    const [activeStep, setActiveStep] = (0, $d170ef2c6ed47533$exports.useState)(0);
+    const [tutorial, setTutorial] = (0, $d170ef2c6ed47533$exports.useState)(null);
+    const baseUrl = message?.data?._plugin?.baseUrl;
+    const productId = message?.data?._plugin?.productId;
+    const topicId = message?.data?._plugin?.topicId;
+    const locale = message?.data?._plugin?.locale || 'en_US';
+    (0, $d170ef2c6ed47533$exports.useEffect)(()=>{
+        const fetchTutorial = async ()=>{
+            try {
+                const response = await fetch(`${baseUrl}?product_id=${productId}&topic_id=${topicId}&locale=${locale}&fields=product,manufacturer,os,topic,choice,category,flow,steps,meta`);
+                const data = await response.json();
+                if (Array.isArray(data) && data.length > 0) setTutorial(data[0]);
+            } catch (error) {
+                console.error("Failed to fetch tutorial:", error);
+            }
+        };
+        if (baseUrl && productId && topicId) fetchTutorial();
+    }, [
+        baseUrl,
+        productId,
+        topicId,
+        locale
+    ]);
+    const handleScroll = ()=>{
+        if (containerRef.current) {
+            const scrollLeft = containerRef.current.scrollLeft;
+            const width = containerRef.current.offsetWidth;
+            const index = Math.round(scrollLeft / width);
+            setActiveStep(index);
+        }
     };
-    const prevStep = ()=>{
-        if (currentStep > 0) setCurrentStep(currentStep - 1);
+    (0, $d170ef2c6ed47533$exports.useEffect)(()=>{
+        const container = containerRef.current;
+        if (container) {
+            container.addEventListener("scroll", handleScroll);
+            return ()=>container.removeEventListener("scroll", handleScroll);
+        }
+    }, []);
+    const scrollToStep = (direction)=>{
+        if (containerRef.current) {
+            const stepWidth = containerRef.current.offsetWidth;
+            containerRef.current.scrollBy({
+                left: direction * stepWidth,
+                behavior: 'smooth'
+            });
+        }
     };
-    const step = tutorial.steps[currentStep];
+    if (!tutorial) return /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+        className: "tutorial-viewer"
+    }, "Loading tutorial...");
     return /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "tutorial-viewer"
     }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
@@ -3855,44 +3895,45 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
         className: "tutorial-title"
     }, tutorial.topic.name), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("h2", {
         className: "tutorial-device"
-    }, tutorial.product.name), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("p", {
-        className: "tutorial-description"
-    }, tutorial.meta.description)), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+    }, tutorial.product.name)), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "tutorial-navigation"
     }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
-        className: "nav-button prev-step",
-        onClick: prevStep,
-        disabled: currentStep === 0
+        className: "nav-button",
+        onClick: ()=>scrollToStep(-1)
     }, "\u2190"), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
-        className: "tutorial-step"
-    }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
-        className: "tutorial-step-img-wrapper"
-    }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("img", {
-        src: step.mergedUrl,
-        alt: `Step ${currentStep + 1}`,
-        className: "w-full h-auto object-contain",
-        loading: "eager"
-    }), step.clicker && /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
-        className: "clicker",
-        style: {
-            width: 60,
-            height: 60,
-            top: `${step.clicker.y * 100}%`,
-            left: `${step.clicker.x * 100}%`,
-            transform: "translate(-50%, -50%)"
-        }
-    })), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("p", {
-        className: "tutorial-step-text"
-    }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement((0, $878802ac9d103e69$export$2e2bcd8739ae039), {
-        markdown: step.text
-    }))), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
+        className: "tutorial-steps-scroll",
+        ref: containerRef
+    }, tutorial.steps.map((step, index)=>/*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+            className: `tutorial-step ${index === activeStep ? "active" : ""}`,
+            key: index
+        }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+            className: "tutorial-step-wrapper"
+        }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+            className: "tutorial-step-img-wrapper"
+        }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("img", {
+            src: step.mergedUrl,
+            alt: `Step ${index + 1}`,
+            className: "w-full h-auto object-contain"
+        }), step.clicker && /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+            className: "clicker",
+            style: {
+                width: 60,
+                height: 60,
+                top: `${step.clicker.y * 100}%`,
+                left: `${step.clicker.x * 100}%`,
+                transform: "translate(-50%, -50%)"
+            }
+        })), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+            className: "tutorial-step-text"
+        }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement((0, $878802ac9d103e69$export$2e2bcd8739ae039), {
+            markdown: step.text
+        })))))), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
         className: "nav-button next-step",
-        onClick: nextStep,
-        disabled: currentStep === tutorial.steps.length - 1
+        onClick: ()=>scrollToStep(1)
     }, "\u2192")));
 };
 const $a3890b0e758ab3ef$export$cfa223d39f988ec3 = {
-    match: "qelp-tutorial",
+    match: 'qelp-tutorial',
     component: $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e
 };
 

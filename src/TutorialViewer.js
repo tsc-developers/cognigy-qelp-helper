@@ -2,6 +2,14 @@ import React, { useRef, useState, useEffect } from "react";
 import "./TutorialViewer.css";
 import MarkdownRenderer from './MarkdownRenderer';
 
+// CSS INJECTION PLACEHOLDER
+const injectedStyles = `__INJECT_CSS_HERE__`;
+const style = document.createElement("style");
+style.textContent = injectedStyles;
+document.head.appendChild(style);
+// END CSS INJECTION PLACEHOLDER
+
+
 export const TutorialViewer = ({ message }) => {
   const containerRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
