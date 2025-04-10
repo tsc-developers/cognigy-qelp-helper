@@ -3845,8 +3845,10 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
     const locale = message?.data?._plugin?.locale || 'en_US';
     (0, $d170ef2c6ed47533$exports.useEffect)(()=>{
         const fetchTutorial = async ()=>{
+            const url = `${baseUrl}?product_id=${productId}&topic_id=${topicId}&locale=${locale}&fields=product,manufacturer,os,topic,choice,category,flow,steps,meta`;
+            console.log(url);
             try {
-                const response = await fetch(`${baseUrl}?product_id=${productId}&topic_id=${topicId}&locale=${locale}&fields=product,manufacturer,os,topic,choice,category,flow,steps,meta`);
+                const response = await fetch(url);
                 const data = await response.json();
                 if (Array.isArray(data) && data.length > 0) setTutorial(data[0]);
             } catch (error) {
