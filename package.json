@@ -23,6 +23,8 @@
   "author": "sergio.marreiro@foundever.com",
   "license": "ISC",
   "dependencies": {
+    "dompurify": "^3.2.5",
+    "marked": "^9.1.6",
     "parcel": "^2.14.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

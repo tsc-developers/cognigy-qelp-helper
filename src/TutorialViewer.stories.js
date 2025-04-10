@@ -135,7 +135,13 @@ const sampleTutorial = {
         "description": "Change privacy settings in browser on your Apple iPhone 11 14. Use our step-by-step tutorials to manually configure your iPhone 11 14"
     }
 };
-
+const sampleMessage = {
+    data: {
+        _plugin: {
+            tutorial: sampleTutorial
+        }
+    }
+}
 const Template = (args) => (
   <div style={{ width: "100%", height: "500px" }}>
     <TutorialViewer {...args} />
@@ -144,5 +150,5 @@ const Template = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  tutorial: sampleTutorial,
+  message: sampleMessage,
 };
