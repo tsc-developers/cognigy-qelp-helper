@@ -61,7 +61,7 @@ We inject CSS into the TutorialViewer.js file during the build process to ensure
 
 The TutorialViewer dynamically loads a tutorial via HTTP request using data from the Cognigy message:
 
-- URL: https://tmobileusa-99-staging.qelpcare.com/usecases
+- ex url: https://tmobileusa-99-staging.qelpcare.com/usecases
 - Required query parameters:
     - product_id
     - topic_id
