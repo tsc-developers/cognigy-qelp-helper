@@ -10,7 +10,6 @@ if (!window.__COGNIGY_WEBCHAT) throw new Error('Cognigy Webchat v2.7 or higher h
 $d170ef2c6ed47533$exports = window.__COGNIGY_WEBCHAT.React;
 
 
-
 // MarkdownRenderer.jsx
 
 var $1222a5f08162cc3a$exports = {};
@@ -3734,6 +3733,107 @@ function $878802ac9d103e69$export$2e2bcd8739ae039({ markdown: markdown }) {
 }
 
 
+const $a3890b0e758ab3ef$var$style = document.createElement("style");
+$a3890b0e758ab3ef$var$style.textContent = `
+/* TutorialViewer.css */
+
+.tutorial-viewer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.tutorial-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.tutorial-device {
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  color: #555;
+}
+
+.tutorial-steps-scroll-wrapper {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.nav-button {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  z-index: 999;
+  border: 0;
+  background-color: #55555533;
+}
+.nav-button.next-step {
+  right: 0;
+}
+
+.tutorial-navigation {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: fit-content;
+}
+
+.tutorial-navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.tutorial-step {
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  position: relative;
+  text-align: center;
+  padding: 1rem;
+  width: calc(100% - 90px);
+  height: fit-content;
+  box-shadow: 0 0 4px 4px #55555533;
+  border-radius: 8px;
+  margin: auto;
+}
+.tutorial-step-img-wrapper {
+  position: relative;
+  display: block;
+  width: 192px;
+  height: 376px;
+  margin: auto;
+}
+
+.tutorial-step img {
+  position: absolute;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.tutorial-step-text {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.clicker {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+`;
+document.head.appendChild($a3890b0e758ab3ef$var$style);
 const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
     const tutorial = message?.data?._plugin?.tutorial;
     const [currentStep, setCurrentStep] = (0, $d170ef2c6ed47533$exports.useState)(0);
