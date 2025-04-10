@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Qelp Helper Plugin",
   "scripts": {
-    "build": "parcel build src/index.jsx --dist-dir dist",
+    "prebuild": "node scripts/inject-css.js",    
+    "build": "npm run prebuild && parcel build src/index.jsx --dist-dir dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

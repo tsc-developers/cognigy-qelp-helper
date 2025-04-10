@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import MarkdownRenderer from './MarkdownRenderer';
 
-const style = document.createElement("style");
-style.textContent = `
-/* TutorialViewer.css */
+require('./TutorialViewer.css');
+
+const injectedStyles = `/* TutorialViewer.css */
 
 .tutorial-viewer {
   display: flex;
@@ -99,9 +99,14 @@ style.textContent = `
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}`;
+
+if (typeof document !== 'undefined') {
+  const styleEl = document.createElement('style');
+  styleEl.type = 'text/css';
+  styleEl.innerText = injectedStyles;
+  document.head.appendChild(styleEl);
 }
-`
-document.head.appendChild(style);
 
 export const TutorialViewer = ({ message }) => {
   const tutorial = message?.data?._plugin?.tutorial;
@@ -126,6 +131,7 @@ export const TutorialViewer = ({ message }) => {
       <div className="tutorial-header">
         <h1 className="tutorial-title">{tutorial.topic.name}</h1>
         <h2 className="tutorial-device">{tutorial.product.name}</h2>
+        <p className="tutorial-description">{tutorial.meta.description}</p>
       </div>
 
       <div className="tutorial-navigation">

@@ -3733,9 +3733,8 @@ function $878802ac9d103e69$export$2e2bcd8739ae039({ markdown: markdown }) {
 }
 
 
-const $a3890b0e758ab3ef$var$style = document.createElement("style");
-$a3890b0e758ab3ef$var$style.textContent = `
-/* TutorialViewer.css */
+
+const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
 
 .tutorial-viewer {
   display: flex;
@@ -3831,9 +3830,13 @@ $a3890b0e758ab3ef$var$style.textContent = `
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}`;
+if (typeof document !== 'undefined') {
+    const styleEl = document.createElement('style');
+    styleEl.type = 'text/css';
+    styleEl.innerText = $a3890b0e758ab3ef$var$injectedStyles;
+    document.head.appendChild(styleEl);
 }
-`;
-document.head.appendChild($a3890b0e758ab3ef$var$style);
 const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
     const tutorial = message?.data?._plugin?.tutorial;
     const [currentStep, setCurrentStep] = (0, $d170ef2c6ed47533$exports.useState)(0);
@@ -3852,7 +3855,9 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
         className: "tutorial-title"
     }, tutorial.topic.name), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("h2", {
         className: "tutorial-device"
-    }, tutorial.product.name)), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
+    }, tutorial.product.name), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("p", {
+        className: "tutorial-description"
+    }, tutorial.meta.description)), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "tutorial-navigation"
     }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
         className: "nav-button prev-step",
