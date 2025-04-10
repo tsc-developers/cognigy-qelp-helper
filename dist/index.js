@@ -10,21 +10,6 @@ if (!window.__COGNIGY_WEBCHAT) throw new Error('Cognigy Webchat v2.7 or higher h
 $d170ef2c6ed47533$exports = window.__COGNIGY_WEBCHAT.React;
 
 
-const $aaac81b1609d807f$export$5dbeb92769ba3878 = (props)=>{
-    const text = props.message?.text ?? 'No text';
-    return /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("span", {
-        style: {
-            color: 'red'
-        }
-    }, text);
-};
-const $aaac81b1609d807f$export$65e42e5ffa7c7b85 = {
-    match: 'red-text',
-    component: $aaac81b1609d807f$export$5dbeb92769ba3878
-};
-
-
-
 
 // MarkdownRenderer.jsx
 
@@ -3805,6 +3790,7 @@ const $a3890b0e758ab3ef$export$cfa223d39f988ec3 = {
     match: "qelp-tutorial",
     component: $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e
 };
+
 
 
 window.cognigyWebchatMessagePlugins = window.cognigyWebchatMessagePlugins || [];
