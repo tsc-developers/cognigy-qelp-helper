@@ -3880,10 +3880,12 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
     const scrollToStep = (direction)=>{
         if (containerRef.current) {
             const stepWidth = containerRef.current.offsetWidth;
-            containerRef.current.scrollBy({
-                left: direction * stepWidth,
+            const newStep = Math.max(0, Math.min(activeStep + direction, tutorial.steps.length - 1));
+            containerRef.current.scrollTo({
+                left: newStep * stepWidth,
                 behavior: 'smooth'
             });
+            setActiveStep(newStep);
         }
     };
     if (!tutorial) return /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
@@ -3899,8 +3901,8 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
         className: "tutorial-device"
     }, tutorial.product.name)), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "tutorial-navigation"
-    }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
-        className: "nav-button",
+    }, activeStep > 0 && /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
+        className: "nav-button prev-step",
         onClick: ()=>scrollToStep(-1)
     }, "\u2190"), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("div", {
         className: "tutorial-steps-scroll",
@@ -3929,7 +3931,7 @@ const $a3890b0e758ab3ef$export$f6a3cc9ffa13e18e = ({ message: message })=>{
             className: "tutorial-step-text"
         }, /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement((0, $878802ac9d103e69$export$2e2bcd8739ae039), {
             markdown: step.text
-        })))))), /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
+        })))))), tutorial.steps && activeStep < tutorial.steps.length - 1 && /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d170ef2c6ed47533$exports))).createElement("button", {
         className: "nav-button next-step",
         onClick: ()=>scrollToStep(1)
     }, "\u2192")));
