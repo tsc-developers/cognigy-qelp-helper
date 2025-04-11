@@ -18,9 +18,9 @@ To build the plugin to the dist folder run `npm run build`. Please ignore the pa
 ```
 - The warning pops up because Storybook doesn’t officially support Parcel as its internal builder.
 
-- Your plugin project might be built with Parcel, but Storybook doesn’t use your bundler — it uses its own, either Webpack or Vite.
+- Our plugin project might be built with Parcel, but Storybook doesn’t use the bundler — it uses its own, either Webpack or Vite.
 
-- When you run Storybook, it’s running in its own isolated context, and it only needs access to your React components, not your plugin bootstrapping logic (window.cognigyWebchatMessagePlugins).
+- When running Storybook, it’s running in its own isolated context, and it only needs access to our React components, not our plugin bootstrapping logic (window.cognigyWebchatMessagePlugins).
 
 ## Deployment & Public Distribution
 

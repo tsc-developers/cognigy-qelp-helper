@@ -60,9 +60,12 @@ export const TutorialViewer = ({ message }) => {
   const scrollToStep = (direction) => {
     if (containerRef.current) {
       const stepWidth = containerRef.current.offsetWidth;
-      containerRef.current.scrollBy({ left: direction * stepWidth, behavior: 'smooth' });
+      const newStep = Math.max(0, Math.min(activeStep + direction, tutorial.steps.length - 1));
+      containerRef.current.scrollTo({ left: newStep * stepWidth, behavior: 'smooth' });
+      setActiveStep(newStep);
     }
   };
+  
 
   if (!tutorial) return <div className="tutorial-viewer">Loading tutorial...</div>;
 
@@ -74,7 +77,10 @@ export const TutorialViewer = ({ message }) => {
       </div>
 
       <div className="tutorial-navigation">
-        <button className="nav-button" onClick={() => scrollToStep(-1)}>←</button>
+        {activeStep > 0 && (
+          <button className="nav-button prev-step" onClick={() => scrollToStep(-1)}>←</button>
+        )}
+
 
         <div className="tutorial-steps-scroll" ref={containerRef}>
           {tutorial.steps.map((step, index) => (
@@ -107,7 +113,9 @@ export const TutorialViewer = ({ message }) => {
           ))}
         </div>
 
-        <button className="nav-button next-step" onClick={() => scrollToStep(1)}>→</button>
+        {tutorial.steps && activeStep < tutorial.steps.length - 1 && (
+          <button className="nav-button next-step" onClick={() => scrollToStep(1)}>→</button>
+        )}
       </div>
     </div>
   );
