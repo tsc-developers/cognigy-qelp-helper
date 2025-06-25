@@ -3741,7 +3741,7 @@ const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: auto;
   font-family: sans-serif;
 }
 
