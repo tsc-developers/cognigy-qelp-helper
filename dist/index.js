@@ -3773,15 +3773,15 @@ const $a3890b0e758ab3ef$var$injectedStyles = `/* TutorialViewer.css */
 .tutorial-step-wrapper {
   box-shadow: 0 0 4px 4px #55555533;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1rem ;
 }
 .tutorial-step {
   display: block;
-  padding: 45px;
+  padding: 45px 5px;
   scroll-snap-align: start;
   flex-direction: column;
   scroll-snap-align: start;
-  min-width: calc(100% - 90px);
+  min-width: calc(100% - 40px);
 }
 
 .nav-button {

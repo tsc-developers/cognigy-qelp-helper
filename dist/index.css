@@ -44,8 +44,8 @@
   scroll-snap-align: start;
   scroll-snap-align: start;
   flex-direction: column;
-  min-width: calc(100% - 90px);
-  padding: 45px;
+  min-width: calc(100% - 40px);
+  padding: 45px 5px;
   display: block;
 }
 
