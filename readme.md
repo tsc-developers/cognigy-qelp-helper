@@ -5,6 +5,10 @@ This plugin displays tutorial steps fetched from a remote API based on parameter
 ---
 
 ## Build
+This uses nvm 18.17.0
+```
+nvm use 18.17.0 
+```
 
 To build the plugin to the dist folder run `npm run build`. Please ignore the parcel/babel warnings:
 
